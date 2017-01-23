@@ -354,7 +354,6 @@ namespace calculator {
 			break;
 		case 1:
 			answer = x + y;
-			Console::WriteLine("CANS: " + answer);
 			break;
 		case 2:
 			answer = x - y;
