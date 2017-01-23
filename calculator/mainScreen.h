@@ -312,7 +312,7 @@ namespace calculator {
 	private:
 		int flag = 0;
 		int operation = 0;
-		double x, y, answer;
+		double x = 0, y = 0, answer = 0;
 	private: System::Void btn_number_Click(System::Object^  sender, System::EventArgs^  e) {
 		String^ btnPressedValue = safe_cast<Button ^>(sender)->Text;
 		if (btnPressedValue == "." && flag == 0) {
@@ -325,8 +325,8 @@ namespace calculator {
 	}
 	private: System::Void btn_runOperation(System::Object^  sender, System::EventArgs^  e) {
 	String^ btnPressedValue = safe_cast<Button ^>(sender)->Text;
-	answer = 0;
-	x = Convert::ToDouble(txtBox_answer->Text);
+	if(operation == 0)
+		x = Convert::ToDouble(txtBox_answer->Text);
 	Console::WriteLine("tmpString: "+txtBox_answer->Text);
 	if (btnPressedValue == "+") {
 		txtBox_answer->Text = "";
@@ -346,10 +346,11 @@ namespace calculator {
 	}
 	else {
 		y = Double::Parse(txtBox_answer->Text);
-		Console::WriteLine("X: " + x + "Y: " + y);
+		Console::WriteLine("X: " + x + " Y: " + y);
 		Console::WriteLine("SelOperation: " + operation);
 		switch (operation) {
 		default:
+			answer = x;
 			break;
 		case 1:
 			answer = x + y;
@@ -369,10 +370,7 @@ namespace calculator {
 				txtBox_answer->Text = "CANNOT DIVIDE BY ZERO";
 			break;
 		}
-		Console::WriteLine("BANS: " + answer);
-		//if (operation != 0)
-			//answer = x;
-		Console::WriteLine("AANS: " + answer);
+		operation = 0;
 		txtBox_answer->Text = (answer).ToString();
 	}
 }
