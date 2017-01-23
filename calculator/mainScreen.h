@@ -1,6 +1,6 @@
 #pragma once
 
-#include <math.h>
+#include <cmath>
 #include <cstdio>
 #include <cstdlib>
 
@@ -311,6 +311,8 @@ namespace calculator {
 
 	private:
 		int flag = 0;
+		int operation = 0;
+		double x, y, answer;
 	private: System::Void btn_number_Click(System::Object^  sender, System::EventArgs^  e) {
 		String^ btnPressedValue = safe_cast<Button ^>(sender)->Text;
 		if (btnPressedValue == "." && flag == 0) {
@@ -321,13 +323,11 @@ namespace calculator {
 			txtBox_answer->Text += btnPressedValue;
 		
 	}
-
-int operation;
-private: System::Void btn_runOperation(System::Object^  sender, System::EventArgs^  e) {
+	private: System::Void btn_runOperation(System::Object^  sender, System::EventArgs^  e) {
 	String^ btnPressedValue = safe_cast<Button ^>(sender)->Text;
-	double x, y, answer;
-	
-	x = Double::Parse(txtBox_answer->Text);
+	answer = 0;
+	x = Convert::ToDouble(txtBox_answer->Text);
+	Console::WriteLine("tmpString: "+txtBox_answer->Text);
 	if (btnPressedValue == "+") {
 		txtBox_answer->Text = "";
 		operation = 1;
@@ -346,12 +346,14 @@ private: System::Void btn_runOperation(System::Object^  sender, System::EventArg
 	}
 	else {
 		y = Double::Parse(txtBox_answer->Text);
-		printf("%d", operation);
-		switch (operation){
+		Console::WriteLine("X: " + x + "Y: " + y);
+		Console::WriteLine("SelOperation: " + operation);
+		switch (operation) {
 		default:
 			break;
 		case 1:
 			answer = x + y;
+			Console::WriteLine("CANS: " + answer);
 			break;
 		case 2:
 			answer = x - y;
@@ -365,10 +367,14 @@ private: System::Void btn_runOperation(System::Object^  sender, System::EventArg
 			}
 			else
 				txtBox_answer->Text = "CANNOT DIVIDE BY ZERO";
+			break;
 		}
-		txtBox_answer->Text=(answer).ToString();
-		x = answer;
+		Console::WriteLine("BANS: " + answer);
+		//if (operation != 0)
+			//answer = x;
+		Console::WriteLine("AANS: " + answer);
+		txtBox_answer->Text = (answer).ToString();
 	}
 }
-};
+	};
 }
