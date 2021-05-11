@@ -10,4 +10,3 @@ Hope this helps other(s) to start learning UI development in VC++.
 
 ![alt text](./sample/calculator.jpg)
 
-<footer>brosahay&copy;2015</footer>
